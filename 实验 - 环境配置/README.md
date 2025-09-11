@@ -1,6 +1,6 @@
 # 实验前 - 环境配置
 
-ICS I 共有 3 个 Lab，分别是 DataLab、BombLab、CacheLab 和 LinkLab。
+ICS I 共有 4 个 Lab，分别是 DataLab、BombLab、CacheLab 和 LinkLab。
 
 这些 Lab 都需要在 Linux 环境下完成，因此需要先配置好实验环境。
 
