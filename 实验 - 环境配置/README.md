@@ -182,6 +182,50 @@ wsl --install
 
 请您参考微软官方的教程：[旧版 WSL 的手动安装步骤](https://learn.microsoft.com/zh-cn/windows/wsl/install-manual)
 
-## 2. 在 WSL 内安装 Git
+## 2. 安装 VSCode 并连接 WSL
 
-## 3. 安装 VSCode 并连接 WSL
+### 2.1. 安装 VSCode
+
+考虑到调查问卷显示大部分同学都修过 C 语言相关课程，估计大部分同学应该已经安装好 VSCode 了。
+
+假如您的电脑上没有安装 VSCode 的话，请按照[VS Code C C++环境配置实用手册（修订版第三版）.pdf](./VS%20Code%20C%20C++环境配置实用手册（修订版第三版）.pdf)中“四、下载并安装VS Code”章节的内容，安装 VSCode。**您不需要执行该教程中其余的章节，因为那些内容与 ICS 课程实验无关。**
+
+### 2.2. 启用 VSCode 连接的 WSL 功能
+
+对于新版的 VSCode，启用 WSL 非常简单：
+
+一、单击 VSCode 左下角的“><”符号
+
+![VSCode WSL 1](.img/codewsl1.png)
+
+二、单击 VSCode 顶侧出现的选择菜单中的“WSL”
+
+![VSCode WSL 2](.img/codewsl2.png)
+
+三、耐心等待安装完成
+
+![VSCode WSL 3](.img/codewsl3.png)
+
+等待安装完成后，您就成功安装好 VSCode 的 WSL 插件了。不过这时您好没有连接到 WSL。
+
+### 2.3. 连接到 WSL
+
+一、单击 VSCode 左下角的“><”符号
+
+![VSCode WSL 4](.img/codewsl4.png)
+
+二、单击 VSCode 顶侧出现的选择菜单中的“Connect to WSL”
+
+![VSCode WSL 5](.img/codewsl5.png)
+
+三、耐心等待连接完成
+
+由于首次连接时需要在 WSL 内安装必要的组件，所以连接过程可能会比较漫长，请耐心等待。
+
+![VSCode WSL 6](.img/codewsl6.png)
+
+连接完成后，您就成功连接到 WSL 了。您可以在左下角看到“WSL: Ubuntu“字样，这验证了您已经成功连接到 WSL。
+
+![VSCode WSL 7](.img/codewsl7.png)
+
+## 3. 在 WSL 内安装 Git
