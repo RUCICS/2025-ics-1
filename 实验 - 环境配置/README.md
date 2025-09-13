@@ -459,7 +459,7 @@ Git Graph 插件是 VSCode 的一个插件，它可以让您在 VSCode 中通过
 
 ## 4. 技术支持
 
-如果您遇到任何问题，您可以尝试阅读[WSL 安装自助排查文档.md](WSL 安装自助排查文档.md)和[Git 安装自助排查文档.md](./Git 安装自助排查文档.md)。
+如果您遇到任何问题，您可以尝试阅读[WSL 安装自助排查文档.md](./WSL%20安装自助排查文档.md)和[Git 安装自助排查文档.md](./Git%20安装自助排查文档.md)。
 
 如果这两个文档没有记载您的问题，请您在论坛 [http://forum.rucics.tech](http://forum.rucics.tech) 上的“0 WSL Git VSCode 环境配置”板块寻求助教的帮助。
 
