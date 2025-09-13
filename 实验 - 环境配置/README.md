@@ -29,7 +29,7 @@ ICS I 共有 4 个 Lab，分别是 DataLab、BombLab、CacheLab 和 LinkLab。
     - [3.6. 尝试提交（Commit）代码](#36-尝试提交commit代码)
     - [3.7. 上传（Push）代码到远程仓库](#37-上传push代码到远程仓库)
     - [3.8. 在 VSCode 中安装 Git Graph 插件并查看 Git 记录](#38-在-vscode-中安装-git-graph-插件并查看-git-记录)
-      - [3.9.（可选）进一步学习 Git](#39可选进一步学习-git)
+    - [3.9.（可选）进一步学习 Git](#39可选进一步学习-git)
   - [4. 技术支持](#4-技术支持)
   - [5. 总结](#5-总结)
 
@@ -451,7 +451,7 @@ Git Graph 插件是 VSCode 的一个插件，它可以让您在 VSCode 中通过
 
 ![Git Graph](.img/gitgraph3.png)
 
-#### 3.9.（可选）进一步学习 Git
+### 3.9.（可选）进一步学习 Git
 
 这里的指南显然称不上任何意义上的学习 Git 的指南，虽然这里您学到的东西基本上已经够您完成实验了。
 
