@@ -4,6 +4,36 @@ ICS I 共有 4 个 Lab，分别是 DataLab、BombLab、CacheLab 和 LinkLab。
 
 这些 Lab 都需要在 Linux 环境下完成，因此需要先配置好实验环境。
 
+## 目录
+- [实验前 - 环境配置](#实验前---环境配置)
+  - [目录](#目录)
+  - [1. 安装 WSL](#1-安装-wsl)
+    - [1.1. 认识 WSL 和 Linux](#11-认识-wsl-和-linux)
+      - [1.1.1. 什么是操作系统？](#111-什么是操作系统)
+      - [1.1.2. “开源的类 Unix 操作系统”是什么意思？](#112-开源的类-unix-操作系统是什么意思)
+      - [1.1.3. 关于 WSL 和 Linux 环境](#113-关于-wsl-和-linux-环境)
+    - [1.2. 最新版 Windows 11 上的 WSL 安装步骤](#12-最新版-windows-11-上的-wsl-安装步骤)
+      - [1.2.1. 判断我的电脑是否可以简单地安装 WSL](#121-判断我的电脑是否可以简单地安装-wsl)
+      - [1.2.2. 安装 WSL](#122-安装-wsl)
+    - [1.3. 旧版 Windows 10 上的 WSL 安装步骤](#13-旧版-windows-10-上的-wsl-安装步骤)
+  - [2. 安装 VSCode 并连接 WSL](#2-安装-vscode-并连接-wsl)
+    - [2.1. 安装 VSCode](#21-安装-vscode)
+    - [2.2. 启用 VSCode 连接的 WSL 功能](#22-启用-vscode-连接的-wsl-功能)
+    - [2.3. 连接到 WSL](#23-连接到-wsl)
+  - [3. 在 WSL 内安装 Git](#3-在-wsl-内安装-git)
+    - [3.1. 认识 Git](#31-认识-git)
+    - [3.2. 安装 Git](#32-安装-git)
+    - [3.3. 注册 GitHub 账号并创建仓库](#33-注册-github-账号并创建仓库)
+    - [3.4. 克隆（Clone）仓库](#34-克隆clone仓库)
+    - [3.5. 设置 Git 的用户名和邮箱](#35-设置-git-的用户名和邮箱)
+    - [3.6. 尝试提交（Commit）代码](#36-尝试提交commit代码)
+    - [3.7. 上传（Push）代码到远程仓库](#37-上传push代码到远程仓库)
+    - [3.8. 在 VSCode 中安装 Git Graph 插件并查看 Git 记录](#38-在-vscode-中安装-git-graph-插件并查看-git-记录)
+      - [3.9.（可选）进一步学习 Git](#39可选进一步学习-git)
+  - [4. 技术支持](#4-技术支持)
+  - [5. 总结](#5-总结)
+
+
 ## 1. 安装 WSL
 
 ### 1.1. 认识 WSL 和 Linux
@@ -229,3 +259,214 @@ wsl --install
 ![VSCode WSL 7](.img/codewsl7.png)
 
 ## 3. 在 WSL 内安装 Git
+
+### 3.1. 认识 Git
+
+~~考虑到阅读本教程的大部分同学是初次接触 Git，所以这里只介绍简化版的 Git 概念，缺少许多最重要的内容。严格来说，这里只介绍了完成实验所需的最少的 Git 概念，所以其内容极其片面而不完整。如果希望深入了解 Git，请阅读[Git教程-廖雪峰.pdf](./Git教程-廖雪峰.pdf)~~
+
+Git 是 Linux 内核的作者 Linus Torvalds 为了更好地管理 Linux 内核的开发而开发的一个版本管理工具。
+
+什么是版本管理？版本管理就是管理文件的版本，记录文件的修改历史，方便我们回溯到文件的某个历史版本。
+
+举个例子，您在写一篇论文，您需要记录您论文的每个版本。
+
+如果不使用任何版本管理工具，您可能会这样管理您论文的版本：
+
+1. 毕业论文.docx
+2. 毕业论文修改版.docx
+3. 毕业论文最终版.docx
+4. 毕业论文最终版v2.docx
+5. 毕业论文最终版v2_最终版.docx
+
+毫无疑问，这是混乱的。
+
+版本管理工具就是用于解决这种问题的。
+
+以 Git 为例，这种工具将一个文件夹视作一个可变的东西，某个特定时刻的文件夹状态是一个版本，而两个版本之间的“**差异（Diff）**”被称作一次“**提交（Commit）**”。
+
+为了便于多人协作，Git 支持您将代码上传到一个叫“**远程仓库（Remote Repository）**”的地方，这样其他人就可以看到您的代码，并进行协作。同样的，Git 也支持你从远程仓库下载代码。
+
+当然，Git 比我上面讲的要复杂得多，但是对于 ICS 实验来说，知道这些就够了。接下来，我将教会你们在 VSCode 中通过图形化的方式使用 Git。
+
+### 3.2. 安装 Git
+
+Windows 上安装软件往往通过下载安装包的方式完成，但是 Ubuntu（您安装的 WSL 的 Linux 发行版的名字）上不是这样的。
+
+Ubuntu 使用了一种称之为**包管理器**的工具安装软件。每个软件被视作一个**包**，而所有包都被放在一个类似于应用商店的地方——这个地方被称作**软件源（Software Source）**。
+
+Ubuntu 是 Debian 的一个更易于使用的修改版，因此 Ubuntu 使用了和 Debian 一样的包管理器——**APT（Advanced Package Tool）**。
+
+APT 的原理是这样的：APT 会在您的电脑上保存一个包的列表，上面记录了软件源中记录的所有的包的信息，以便于在本地进行搜索。
+
+所以，如果您希望用 APT 安装 Git，您需要做的第一件事是下载这个软件源的列表。您只需要在 WSL 中执行如下命令：
+
+```bash
+sudo apt update
+```
+
+不过你可能会问：如何在 WSL 中执行命令？方法有很多种，其中最常用的一种是这样的：
+
+一、按照“连接到 WSL”中的方法用 VSCode 连接到 WSL。
+
+二、用如下方法把终端（Terminal）从 VSCode 的底部拽起来：
+
+![Open Terminal](.img/openterm1.png)
+
+![Open Terminal](.img/openterm2.png)
+
+三、单击被拽起来的终端，使光标（Cursor）出现在终端中。终端中的光标指的是下图中的白色方块：
+
+![Open Terminal](.img/openterm3.png)
+
+四、在终端中输入您需要执行的命令，并按下回车键。
+
+您可能希望复制命令并粘贴到终端中。您需要注意：与文本编辑器中不同，终端中的 Ctrl+C 不表示复制，而是表示终止当前程序的命令。那么终端中难道不能复制粘贴吗？当然可以。您需要在终端中使用 Ctrl+Shift+C 和 Ctrl+Shift+V 来复制和粘贴。
+
+例如，如果你希望从本文档复制“sudo apt update”，并粘贴到终端中，您需要先按下 Ctrl+C 复制文本，单击终端以确保光标（那个白色方块）出现在终端内，然后按下 Ctrl+Shift+V 粘贴，最后按下回车表示执行命令。
+
+按下回车后，您会看到如下界面：
+
+![Password Input](.img/passwdinput.png)
+
+这里您需要输入密码，不过像您安装 WSL 时一样，您在输入密码时，屏幕上不会显示任何字符。这是正常现象。
+
+在耐心等待命令执行完成后，如果您看到如下输出，则说明 APT 成功下载了软件列表：
+
+![APT Update](.img/apt1.png)
+
+如果您看到的输出中有“E：”开头的报错，则说明出现了某种问题，请您在论坛 [http://forum.rucics.tech](http://forum.rucics.tech) 上的“0 WSL Git VSCode 环境配置”板块寻求助教的帮助。
+
+接下来，您需要命令 APT 下载 Git 并安装。您只需要执行下面的这行命令：
+
+```bash
+sudo apt install git
+```
+
+按下回车后，您会看到如下界面：
+
+![APT Install](.img/hahaha.png)
+
+这是正常的，这说明您的 WSL 在此之前已经安装了 Git，您无需做任何操作。
+
+当然，生气的你可能会问，既然 Ubuntu 已经安装 Git 了，我为什么还要执行这个命令？
+
+这主要是因为：
+
+1. ~~助教写这个教程的时候不知道 Ubuntu 已经安装了 Git，但写完之后不舍得删。~~
+2. 在之后的实验中，您需要在终端内执行很多命令，学会如何在终端内执行命令是非常重要的。
+
+### 3.3. 注册 GitHub 账号并创建仓库
+
+我们现在已经知道，Git 支持您将代码上传到一个叫“**远程仓库（Remote Repository）**”的地方。GitHub 就是这样一个公共的远程仓库。
+
+GitHub 的网址是 [https://github.com](https://github.com)。如果您打不开这个网址，或网站过于的缓慢，请您联系助教李甘（微信：nictheboy）。
+
+您需要在 GitHub 上注册一个账号。一般来说，这很简单，如果遇到任何问题，请在论坛 [http://forum.rucics.tech](http://forum.rucics.tech) 上的“0 WSL Git VSCode 环境配置”板块寻求助教的帮助。
+
+注册完成后，您需要创建一个**仓库（Repository）**。仓库是一个用于存放代码及其版本信息的文件夹。
+
+![https://docs.github.com/zh/repositories/creating-and-managing-repositories/quickstart-for-repositories](.img/aaa.png)
+
+### 3.4. 克隆（Clone）仓库
+
+我们假设您已经创建了一个仓库：
+
+![Git](.img/git1.png)
+
+请您复制这个仓库的网址，然后点击 VSCode 中的“Clone Repository（克隆仓库）”按钮，粘贴仓库的网址，然后回车确认。
+
+![Git](.img/git2.png)
+
+现在 VSCode 再让你选择克隆这个仓库到您 WSL 内的哪个文件夹。由于您的 WSL 内没有什么您创建的文件夹，您只需要使用默认的位置即可。您不需要做任何操作，只需要直接点击蓝色按钮确认：
+
+![Git](.img/git3.png)
+
+耐心等待，很快你的仓库就克隆成功了。
+
+![Git](.img/git4.png)
+
+如果克隆失败，请您在论坛 [http://forum.rucics.tech](http://forum.rucics.tech) 上的“0 WSL Git VSCode 环境配置”板块寻求助教的帮助。
+
+### 3.5. 设置 Git 的用户名和邮箱
+
+您需要按照“安装 Git”中的方法，拉起终端，并执行如下命令：
+
+```bash
+git config --global user.name "您的 GitHub 用户名"
+git config --global user.email "您的 GitHub 邮箱"
+```
+
+例如，如果您希望设置您的用户名和邮箱为“nictheboy”和“<nictheboy@outlook.com>”，您需要输入如下命令：
+
+```bash
+git config --global user.name "nictheboy"
+git config --global user.email "nictheboy@outlook.com"
+```
+
+![Git](.img/git5.png)
+
+如果没有报错，则说明您已经成功设置好了 Git 的用户名和邮箱。
+
+### 3.6. 尝试提交（Commit）代码
+
+为了学习 Git，您可以在您的仓库中创建任意文件并写入一些内容。您必须在新创建的文件内写一些内容，因为 Git 不会区分空文件和不存在的文件。
+
+然后，您需要像下图中一样，写一些提交信息（Commit Message），并点击“Commit”按钮提交代码。
+
+![Git](.img/git6.png)
+
+![Git](.img/git7.png)
+
+需要注意的是，这里“提交代码”只是指创建了一个版本，但是这个版本到目前为止依然只存在于您的电脑上（称之为“本地仓库”），而您还没有将这个版本上传到远程仓库即您的 GitHub 仓库。
+
+### 3.7. 上传（Push）代码到远程仓库
+
+为了上传到远程仓库，您只需要点一下这个“Sync Changes”按钮：
+
+![Git](.img/git8.png)
+
+![Git](.img/git9.png)
+
+之后，您需要按照提示登录 GitHub 账号：
+
+![Git](.img/git10.png)
+
+![Git](.img/git11.png)
+
+如果一切顺利，您回到您的 GitHub 仓库，刷新浏览器，会看到您刚刚提交的代码：
+
+![Git](.img/git12.png)
+
+### 3.8. 在 VSCode 中安装 Git Graph 插件并查看 Git 记录
+
+Git Graph 插件是 VSCode 的一个插件，它可以让您在 VSCode 中通过图形化的方式浏览 Git 中存放的文件历史信息（称之为“提交记录（Commit History）”）。
+
+请您安装这一插件：
+
+![Git Graph](.img/gitgraph.png)
+
+安装完毕后，您只需要点击下图中的图标，您就可以浏览 Git 的提交记录了。
+
+![Git Graph](.img/gitgraph2.png)
+
+![Git Graph](.img/gitgraph3.png)
+
+#### 3.9.（可选）进一步学习 Git
+
+这里的指南显然称不上任何意义上的学习 Git 的指南，虽然这里您学到的东西基本上已经够您完成实验了。
+
+如果您有时间和兴趣继续学习 Git，我们强烈推荐您阅读[Git教程-廖雪峰.pdf](./Git教程-廖雪峰.pdf)。
+
+## 4. 技术支持
+
+如果您遇到任何问题，您可以尝试阅读[WSL 安装自助排查文档.md](WSL 安装自助排查文档.md)和[Git 安装自助排查文档.md](./Git 安装自助排查文档.md)。
+
+如果这两个文档没有记载您的问题，请您在论坛 [http://forum.rucics.tech](http://forum.rucics.tech) 上的“0 WSL Git VSCode 环境配置”板块寻求助教的帮助。
+
+## 5. 总结
+
+您或许要说：配置环境真是烦人！讨厌！我还什么也没有写，就浪费了这么多时间。
+
+您说的很对，配置环境确实烦人、无趣而鲜有知识收获。
+
+可是世界上真正有趣的事情又有多少呢？大多是不得不做的无聊之事罢了。Life is such, and such is life.
