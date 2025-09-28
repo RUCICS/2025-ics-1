@@ -9,11 +9,12 @@ cd 你的目录名
 ```bash
 code .
 ```
-### 步骤 0：stash
+### 步骤 0：add .
 由于您大概更改了`bits.c，
-使用`git stash`保存当前更改
+使用`git add .`把更改添加到暂存区
 ```bash
-git stash
+git add .
+git commit -m "你的更改信息"
 ```
 ### 步骤 1：添加远程仓库
 ```bash
@@ -46,14 +47,14 @@ git rebase template/main
 
 2. **解决冲突**
    - 点击打开冲突文件
-   - 在冲突区域选择 **Accept Incoming Change**
+   - 在冲突区域选择 **Accept Current Change**
    
    > **说明**：以后根据实际情况，您可以选择：
-   > - `Accept Current Change` - 接受当前分支的修改
-   > - `Accept Incoming Change` - 接受远程分支的修改  
+   > - `Accept Current Change` - 采用当前更改
+   > - `Accept Incoming Change` - 采用传入更改
    > - `Accept Both Changes` - 接受双方的修改
    > 
-   > 当前建议选择 `Accept Incoming Change`
+   > 当前建议选择 `Accept Current Change`
 
 3. **添加到暂存区**
 - 方法一：
