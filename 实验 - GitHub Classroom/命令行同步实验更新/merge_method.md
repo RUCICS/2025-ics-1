@@ -14,7 +14,6 @@ code .
 使用`git add .`把更改添加到暂存区
 ```bash
 git add .
-git commit -m "你的更改信息"
 ```
 ### 步骤 1：添加远程仓库
 ```bash
@@ -71,21 +70,9 @@ git rebase template/main
    ```
 当你把两个文件都解决完后，就完成了这一步。
 ### 步骤五：解决完冲突后...
-1. 检查确认文件无误后，暂存所有更改
-```
-git add .
-```
-2. 将这些更改追加到当前正在编辑的提交中，并且不修改提交信息
-```
-git commit --amend --no-edit
-```
-3. 继续 rebase 过程
+继续 rebase 过程
 ```
 git rebase --continue
-```
-4. 把之前stash的pop出来
-```bash
-git stash pop
 ```
 ### 如果出现命令编辑器...
 
