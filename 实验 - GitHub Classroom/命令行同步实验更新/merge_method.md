@@ -2,21 +2,18 @@
 
 ### 首先进入您的代码仓库目录：
 ```bash
-cd your-repo-path
+cd 你的目录名
 ```
 
 **强烈推荐**：使用 VSCode 打开项目，便于后续查看和解决冲突
 ```bash
 code .
 ```
-### 步骤 0：stash或者add .
-由于您大概更改了`bits.c`,以下有两种方法。
-1. 如果您暂存，使用`git stash`保存当前更改
-做完合并后，使用`git stash pop`恢复更改
-2. 如果您直接提交（注意，这不是提交作业的意思，GitHub可多次提交），使用`git add .`和`git commit -m "your message"`提交更改。
+### 步骤 0：stash
+由于您大概更改了`bits.c，
+使用`git stash`保存当前更改
 ```bash
-git add .
-git commit -m "your message"
+git stash
 ```
 ### 步骤 1：添加远程仓库
 ```bash
@@ -31,27 +28,12 @@ git fetch template main
 
 ### 步骤 3：合并远程仓库更新
 
-您可以选择以下两种合并方式之一：
-
-#### 方式一：使用 merge
-```bash
-git merge template/main
-```
-
-#### 方式二：使用 rebase  
+使用 rebase  
 ```bash
 git rebase template/main
 ```
-如果`git merge template/main`过程出现如下冲突：
-![alt text](conflict.png)
-你可以换`git rebase template/main`试试
-> 💡 **两种方式的区别**：
-> - **merge**：保留更多合并细节，显示完整的分支合并历史
-> - **rebase**：让提交记录更加整洁，呈现线性历史
-> 
-> 不同项目通常有不同的偏好，您在第一次 `git pull` 时系统也会询问您的选择。
-
-### 情况一：使用 VSCode 解决冲突
+### 步骤 4：解决冲突
+#### 情况一：使用 VSCode 解决冲突
 
 如果您已经运行了 `code .`，可以直接在 VSCode 中解决冲突：
 ![alt text](solve_conflict.png)
@@ -76,12 +58,6 @@ git rebase template/main
 
 如果没有使用 VSCode，需要通过命令行编辑器（如 vim 或 nano）解决：
 
-#### 步骤 1：理解编辑器界面
-执行合并命令后，可能会出现文本编辑器界面。这是因为 merge 操作会自动创建提交，需要您编辑提交信息。
-
-#### 步骤 2：保存并关闭编辑器
-根据打开的编辑器类型进行操作：
-
 **如果是 Vim：**
 - 按 `Esc` 键退出插入模式
 - 输入 `:wq` 保存并退出
@@ -90,3 +66,17 @@ git rebase template/main
 - 按 `Ctrl + X` 退出
 - 按 `Y` 确认保存
 - 按 `Enter` 确认文件名
+
+### 解决完冲突后...继续rebase
+1. 检查确认文件无误后，暂存所有更改
+```
+git add .
+```
+2. 将这些更改追加到当前正在编辑的提交中，并且不修改提交信息
+```
+git commit --amend --no-edit
+```
+3. 继续 rebase 过程
+```
+git rebase --continue
+```
