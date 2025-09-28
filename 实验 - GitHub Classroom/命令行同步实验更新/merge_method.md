@@ -32,15 +32,16 @@ git fetch template main
 ```bash
 git rebase template/main
 ```
+这时候会看到如下报错，我们需要解决冲突
+![alt text](hint.png)
 ### 步骤 4：解决冲突
 #### 情况一：使用 VSCode 解决冲突
 
 如果您已经运行了 `code .`，可以直接在 VSCode 中解决冲突。
 1. **查看冲突文件**
-   - 在左侧面板的 `SOURCE CONTROL: CHANGES` 中查看所有冲突文件
-   - 此次合并中，有两个文件`decl.c`和`README.md`有冲突。
+   - 在左侧面板的 `SOURCE CONTROL: CHANGES` 中查看所有冲突文件。（如果没有这个板块，如图所示，找到标红的两个文件`decl.c`和`README.md`）。此次合并中，这两个文件有冲突。
 首先打开一个文件，看到如下图所示的冲突提示：
-注：如果找不到，ctrl + F,搜索 `<<<<<<< HEAD` 即可
+注：如果找不到这样的提示，ctrl + F,搜索 `<<<<<<< HEAD` 即可。
 ![alt text](solve_conflict.png)
 
 2. **解决冲突**
@@ -56,7 +57,7 @@ git rebase template/main
 
 3. **添加到暂存区**
 - 方法一：
-   - 点击文件右侧的 "+" 号，将修改添加到暂存区
+   - 点击文件右侧的 "+" 号，将修改添加到暂存区（注，如果有人找不到这个页面，使用方法二）。
 ![alt text](add.png)
 - 方法二：
    - 使用命令行。如果你解决的是`decl.c`，运行：
@@ -69,21 +70,21 @@ git rebase template/main
    ```
 当你把两个文件都解决完后，就完成了这一步。
 ### 步骤五：解决完冲突后...
-1. 先把之前stash的pop出来
-```bash
-git stash pop
-```
-2. 检查确认文件无误后，暂存所有更改
+1. 检查确认文件无误后，暂存所有更改
 ```
 git add .
 ```
-3. 将这些更改追加到当前正在编辑的提交中，并且不修改提交信息
+2. 将这些更改追加到当前正在编辑的提交中，并且不修改提交信息
 ```
 git commit --amend --no-edit
 ```
-4. 继续 rebase 过程
+3. 继续 rebase 过程
 ```
 git rebase --continue
+```
+4. 把之前stash的pop出来
+```bash
+git stash pop
 ```
 ### 如果出现命令编辑器...
 
