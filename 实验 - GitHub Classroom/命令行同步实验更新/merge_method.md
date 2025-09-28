@@ -9,7 +9,15 @@ cd your-repo-path
 ```bash
 code .
 ```
-
+### 步骤 0：stash或者add .
+由于您大概更改了`bits.c`,以下有两种方法。
+1. 如果您暂存，使用`git stash`保存当前更改
+做完合并后，使用`git stash pop`恢复更改
+2. 如果您直接提交（注意，这不是提交作业的意思，GitHub可多次提交），使用`git add .`和`git commit -m "your message"`提交更改。
+```bash
+git add .
+git commit -m "your message"
+```
 ### 步骤 1：添加远程仓库
 ```bash
 git remote add template https://github.com/RUCICS/Datalab-2025Fall.git
