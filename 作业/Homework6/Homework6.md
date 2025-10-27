@@ -45,15 +45,19 @@ popl %ebp (instruction 3)
 
 ### Q3(1)
 ##### 右边是C语言源代码文件func.c对应的汇编代码，请写出对应的C语言代码；
-- 画出Line 24执行前栈的状态，以及此时寄存器%edi, %esi, %edx, %ecx, %rsp的值；
 
 ```nasm
 .LC0:
+
     .string "%d %d"
+
 .LC1:
+
     .string "%d %d %d\n"
 
+
 main:
+
     subq    $24, %rsp
     leaq    8(%rsp), %rdx
     leaq    12(%rsp), %rsi
@@ -73,6 +77,10 @@ main:
 ```
 
 #### Answer3(1)
+
+### Q3(2)
+
+- 画出Line 24执行前栈的状态，以及此时寄存器%edi, %esi, %edx, %ecx, %rsp的值；
 
 - 假设进入main函数前%rsp的值为0x8000420（代码中出现的局部变量，要标记在栈图中；图中标记内存地址）
 
