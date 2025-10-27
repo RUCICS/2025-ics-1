@@ -1,4 +1,4 @@
-## Homework8
+## Homework7
 
 姓名 学号
 
@@ -22,7 +22,7 @@ struct data {
 
 struct data d[2];
 ```
-##### Fill in the form
+##### Fill in the form (on a 32-bit machine)
 | Variable  | Start Address |
 |:---------:|:-------------:|
 | d[0]      | 0x8049600     |
@@ -71,61 +71,14 @@ int main()
 - E. struct P5 { short w[3]; char c[3]}. 
 
 #### Answer3
-<!-- 由于Markdown不支持单元格合并，你可以使用插入以下Html的方法，或者干脆直接去掉，插入你完成表格的图片。（注意不要漏掉解题步骤的文字说明） -->
 
-<table>
-  <tr>
-    <th></th>
-    <th colspan="4">Offset of each field</th>
-    <th>Total size</th>
-    <th>Alignment</th>
-  </tr>
-  <tr>
-    <td>A</td>
-    <td>i:0</td>
-    <td>c:4</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>B</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>C</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>D</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>E</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-</table>
+| | Offset 1 | Offset 2 | Offset 3 | Offset 4 | Total size | Alignment |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| A | i:0 | c:4 | | | | |
+| B | | | | | | |
+| C | | | | | | |
+| D | | | | | | |
+| E | | | | | | |
 
 ### Q4
 ##### Suppose we have the following function ‘login’ to perform login process.
